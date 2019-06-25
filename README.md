@@ -53,9 +53,15 @@ where PLACEHOLDER can be:
 
 ## References
 [1] Wei Tang, Pei Yu, and Ying Wu. "Deeply Learned Compositional Models for Human Pose Estimation." in Proceedings of European Conference on Computer Vision (ECCV'18), Munich, Germany, Sept. 2018.
+
 [2] Wei Yang, Shuang Li, Wanli Ouyang, Hongsheng Li, and Xiaogang Wang. "Learning feature pyramids for human pose estimation." In ICCV 2017.
+
 [3] Alejandro Newell, Kaiyu Yang, and Jia Deng. "Stacked hourglass networks for human pose estimation." In ECCV 2016.
+
 [4] https://github.com/facebook/fb.resnet.torch
+
 [5] Mykhaylo Andriluka, Leonid Pishchulin, Peter Gehler, and Bernt Schiele. "2d human pose estimation: New benchmark and state of the art analysis." In CVPR 2014.
+
 [6] Sam Johnson and Mark Everingham. "Clustered pose and nonlinear appearance models for human pose estimation." In BMVC 2010.
+
 [7] Ben Sapp and Ben Taskar. "Modec: Multimodal decomposable models for human pose estimation." In CVPR 2013.
