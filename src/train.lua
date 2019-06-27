@@ -13,6 +13,7 @@ local Logger = require 'src.utils.Logger'
 local Transformer = require 'src.datasets.posetransforms'
 local nngraph = require 'nngraph'
 local utils = require 'src.utils.utils'
+local visualizer = require 'src.utils.visualizer'
 
 local M = {}
 local Trainer = torch.class('resnet.Trainer', M)
@@ -271,7 +272,7 @@ function Trainer:multiScaleTest(epoch, dataloader, scales)
 
   local lossSum, accSum = 0.0, 0.0
   local N = 0
-  local preds = torch.Tensor(dataloader:size(), self.opt.struct.nParts[1], 3)
+  local preds = torch.Tensor(dataloader:size(), self.opt.struct.nParts[1], 2)
 
   self.model:evaluate()
   for n, sample in dataloader:run(false, scales) do
@@ -319,6 +320,17 @@ function Trainer:multiScaleTest(epoch, dataloader, scales)
       --preds[curImgIdx][p][3] = maxy[ix]
     end
 
+
+    local image = require('image')
+
+    local im = image.load(sample.imgPath)
+
+    local outIm = visualizer.drawOutput(im, fuseHm, preds[sample.index[1]])
+
+    win2=image.save(('imgdlcmlsp_test1/%d.jpg'):format(n),outIm)
+
+
+
     -- Compute accuracies
     local acc, preds_hm = self:computeScore(output, sample.target)
     lossSum = lossSum + loss*batchSize
@@ -339,6 +351,7 @@ function Trainer:multiScaleTest(epoch, dataloader, scales)
   self.model:training()
 
   -- -- Saving predictions
+  -- -- Saving predictions
   local predFilePath = paths.concat(self.opt.save, self.opt.expID,
       'pred_multiscale_' .. epoch .. '.h5')
   local predFile = hdf5.open(predFilePath, 'w')
@@ -347,6 +360,26 @@ function Trainer:multiScaleTest(epoch, dataloader, scales)
 
   return accSum / N, lossSum / N
 end
+
+function Trainer:computeScore1(output, target)
+  ------------------------------------------------------------------------------
+  -- Helpful functions for evaluation
+  ------------------------------------------------------------------------------
+  local function calcDists(preds, label, normalize)
+    local dists = torch.Tensor(preds:size(2), preds:size(1))
+    local diff = torch.Tensor(2)
+    for i = 1,preds:size(1) do
+      for j = 1,preds:size(2) do
+        if label[i][j][1] > 1 and label[i][j][2] > 1 then
+          dists[j][i] = torch.dist(label[i][j],preds[i][j])/normalize[i]
+        else
+          dists[j][i] = -1
+        end
+      end
+    end
+    return dists
+  end
+
 
 function Trainer:computeScore(output, target)
   ------------------------------------------------------------------------------

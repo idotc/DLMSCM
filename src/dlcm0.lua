@@ -5,7 +5,19 @@ local nngraph = require 'nngraph'
 local nnlib = cudnn
 local opt = require 'opts'
 
-local struct = opt.struct
-local nParts = struct.nParts
-local nOutChannels = nParts[levelIdx]
-print (nOutChannels)
+local nSemanticLevels = opt.nSemanticLevels
+for levelIdx = 2,1,-1 do
+  print (levelIdx)
+end
+
+a = torch.ones(5,5,2)*2
+a [1] = a[1]*3
+print (a)
+b = torch.ones(5,5,2)*3
+print(nn.CAddTable(false):forward({a,b}))
+
+a = torch.ones(5,5,2)*2
+a [1] = a[1]*3
+print (a)
+b = torch.ones(5,5,2)*3
+print(nn.CAddTable(false):forward({a,b}))
