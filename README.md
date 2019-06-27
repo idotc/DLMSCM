@@ -1,11 +1,6 @@
-# Deeply Learned Compositional Models for Human Pose Estimation
+# Human Pose Estimation with Deeply Learned Multi-Scale Compositional Models
 
-Source code for the paper:
-Wei Tang, Pei Yu, and Ying Wu. "Deeply Learned Compositional Models for Human Pose Estimation." in Proceedings of European Conference on Computer Vision (ECCV'18), Munich, Germany, Sept. 2018.
-
-This implementation is based on the code and data from [1-6]. We thank all the authors for kindly sharing these valuable resources.
-
-Please contact Wei Tang (weitang2015@u.northwestern.edu) for questions concerning the code.
+This implementation is based on the code and data from [1-7]. We thank all the authors for kindly sharing these valuable resources.
 
 ## Setting
 1. Install Torch
@@ -26,7 +21,7 @@ Download MPII [3], LSP [4] and FLIC [5] datasets and create symbolic links so th
   data/lspet_dataset/images
   data/flic/images
   ```
-
+  
 ## Training
 Train a model with 3 semantic levels on 4 GPUs
   ```
@@ -53,12 +48,20 @@ where PLACEHOLDER can be:
 
 3. Evaluate the predictions by comparing them against the corresponding ground truth.
 - Check http://human-pose.mpi-inf.mpg.de/#evaluation for evaluation on MPII data.
-- Use http://human-pose.mpi-inf.mpg.de/results/lsp/evalLSP.zip for evaluation on LSP data. A few joint annotations in `joints-PC.mat` are on the wrong side. We recommend replacing it with `data/lsp/joints-PC-corrected.mat` for more accurate evaluation. 
+- You may evaluate the PCK@0.2 scores of your model on the LSP test set. To get start, download our prediction `pred_multiscale_1_best.h5` and `eval code` from [github](https://github.com/idotc/evalLSP-test), and run the MATLAB script `transfer_pre_test.m`. You'll get the following results
+
 
 ## References
-[1] Wei Yang, Shuang Li, Wanli Ouyang, Hongsheng Li, and Xiaogang Wang. "Learning feature pyramids for human pose estimation." In ICCV 2017.
-[2] Alejandro Newell, Kaiyu Yang, and Jia Deng. "Stacked hourglass networks for human pose estimation." In ECCV 2016.
-[3] https://github.com/facebook/fb.resnet.torch
-[4] Mykhaylo Andriluka, Leonid Pishchulin, Peter Gehler, and Bernt Schiele. "2d human pose estimation: New benchmark and state of the art analysis." In CVPR 2014.
-[5] Sam Johnson and Mark Everingham. "Clustered pose and nonlinear appearance models for human pose estimation." In BMVC 2010.
-[6] Ben Sapp and Ben Taskar. "Modec: Multimodal decomposable models for human pose estimation." In CVPR 2013.
+[1] Wei Tang, Pei Yu, and Ying Wu. "Deeply Learned Compositional Models for Human Pose Estimation." in Proceedings of European Conference on Computer Vision (ECCV'18), Munich, Germany, Sept. 2018.
+
+[2] Wei Yang, Shuang Li, Wanli Ouyang, Hongsheng Li, and Xiaogang Wang. "Learning feature pyramids for human pose estimation." In ICCV 2017.
+
+[3] Alejandro Newell, Kaiyu Yang, and Jia Deng. "Stacked hourglass networks for human pose estimation." In ECCV 2016.
+
+[4] https://github.com/facebook/fb.resnet.torch
+
+[5] Mykhaylo Andriluka, Leonid Pishchulin, Peter Gehler, and Bernt Schiele. "2d human pose estimation: New benchmark and state of the art analysis." In CVPR 2014.
+
+[6] Sam Johnson and Mark Everingham. "Clustered pose and nonlinear appearance models for human pose estimation." In BMVC 2010.
+
+[7] Ben Sapp and Ben Taskar. "Modec: Multimodal decomposable models for human pose estimation." In CVPR 2013.
