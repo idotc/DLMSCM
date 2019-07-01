@@ -14,12 +14,11 @@ This implementation is based on the code and data from [1-7]. We thank all the a
   ```
 
 3. Prepare datasets
-Download MPII [3], LSP [4] and FLIC [5] datasets and create symbolic links so that their respective JPEG images can be found in:
+Download MPII [3] and LSP [4] datasets and create symbolic links so that their respective JPEG images can be found in:
   ```
   data/mpii/images
   data/lsp_dataset/images
   data/lspet_dataset/images
-  data/flic/images
   ```
   
 ## Training
@@ -28,7 +27,6 @@ Train a model with 3 semantic levels on 4 GPUs
   ./experiments/PLACEHOLDER/train_dlcm_l3.sh
   ```
 where PLACEHOLDER can be:
-- flic: Train with FLIC training data.
 - mpii: Train with MPII training data excluding the 3K validation samples.
 - mpii-include-val: Train with MPII training data including the 3K validation samples.
 - mpii-lsp: Train with MPII training data and corrected LSP training data.
@@ -41,7 +39,6 @@ where PLACEHOLDER can be:
   ./experiments/PLACEHOLDER/predict_dlcm_l3.sh
   ```
 where PLACEHOLDER can be:
-- flic: Predict on FLIC testing data.
 - mpii: Predict on MPII 3K validation samples.
 - mpii-include-val: Predict on MPII testing data.
 - mpii-lsp: Predict on LSP testing data.
