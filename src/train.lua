@@ -361,26 +361,6 @@ function Trainer:multiScaleTest(epoch, dataloader, scales)
   return accSum / N, lossSum / N
 end
 
-function Trainer:computeScore1(output, target)
-  ------------------------------------------------------------------------------
-  -- Helpful functions for evaluation
-  ------------------------------------------------------------------------------
-  local function calcDists(preds, label, normalize)
-    local dists = torch.Tensor(preds:size(2), preds:size(1))
-    local diff = torch.Tensor(2)
-    for i = 1,preds:size(1) do
-      for j = 1,preds:size(2) do
-        if label[i][j][1] > 1 and label[i][j][2] > 1 then
-          dists[j][i] = torch.dist(label[i][j],preds[i][j])/normalize[i]
-        else
-          dists[j][i] = -1
-        end
-      end
-    end
-    return dists
-  end
-
-
 function Trainer:computeScore(output, target)
   ------------------------------------------------------------------------------
   -- Helpful functions for evaluation

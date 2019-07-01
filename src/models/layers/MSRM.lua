@@ -16,10 +16,10 @@ local function convBlock(numIn,numOut,inputRes,type,baseWidth, cardinality,strid
         s:add(relu(true))
     end
 
-    s:add(conv(numIn,numOut/2,1,1))
-    s:add(batchnorm(numOut/2))
+    s:add(conv(numIn,math.floor(numOut/2),1,1))
+    s:add(batchnorm(math.floor(numOut/2)))
     s:add(relu(true))
-    s:add(conv(numOut/2,numOut/2,3,3,stride,stride,1,1))
+    s:add(conv(math.floor(numOut/2),math.floor(numOut/2),3,3,stride,stride,1,1))
     addTable:add(s)
 
     -- Pyramid
@@ -49,7 +49,7 @@ local function convBlock(numIn,numOut,inputRes,type,baseWidth, cardinality,strid
         s:add(batchnorm(numIn))
         s:add(relu(true))
     end
-    local a = conv(D,numOut/2,1,1)
+    local a = conv(D,math.floor(numOut/2),1,1)
     a.nBranchIn = C
     s:add(conv(numIn,D,1,1,stride,stride))
     s:add(batchnorm(D))
@@ -57,7 +57,7 @@ local function convBlock(numIn,numOut,inputRes,type,baseWidth, cardinality,strid
     s:add(pyramid(D, C))
     s:add(batchnorm(D))
     s:add(relu(true))
-    -- s:add(conv(D,numOut/2,1,1))
+    -- s:add(conv(D,math.floor(numOut/2),1,1))
     s:add(a)
 
     -- add together
@@ -69,9 +69,9 @@ local function convBlock(numIn,numOut,inputRes,type,baseWidth, cardinality,strid
 
     -- combine model
     return model:add(elewiseAdd)
-        :add(batchnorm(numOut/2))
+        :add(batchnorm(math.floor(numOut/2)))
         :add(relu(true))
-        :add(conv(numOut/2,numOut,1,1))
+        :add(conv(math.floor(numOut/2),numOut,1,1))
 end
 
 -- Skip layer

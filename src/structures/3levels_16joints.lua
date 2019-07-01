@@ -5,9 +5,9 @@
 
 local children = {}
 
--- level 1 (16 parts): 1 - r ankle, 2 - r knee, 3 - r hip, 4 - l hip, 
---   5 - l knee, 6 - l ankle, 7 - pelvis, 8 - thorax, 9 - upper neck, 
---   10 - head top, 11 - r wrist, 12 - r elbow, 13 - r shoulder, 
+-- level 1 (16 parts): 1 - r ankle, 2 - r knee, 3 - r hip, 4 - l hip,
+--   5 - l knee, 6 - l ankle, 7 - pelvis, 8 - thorax, 9 - upper neck,
+--   10 - head top, 11 - r wrist, 12 - r elbow, 13 - r shoulder,
 --   14 - l shoulder, 15 - l elbow, 16 - l wrist
 table.insert(children, torch.range(1,16):totable())
 
@@ -44,7 +44,7 @@ table.insert(partners, {
   {1,6},   {2,5},   {3,4},
   {11,16}, {12,15}, {13,14}
 })
-    
+
 -- level 2
 table.insert(partners, {
   {1,4}, {2,3}, {5,6},

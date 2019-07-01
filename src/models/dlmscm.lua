@@ -6,8 +6,31 @@ local nnlib = cudnn
 local Residual = require('src.models.layers.Residual')
 local MSResidua = require('src.models.layers.MSRM')
 
+local function hourglass(n, f, nModules,inp)
+    -- Upper branch
+    local up1 = inp
+    for i = 1,nModules do up1 = Residual(f,f)(up1) end
 
-local function hourglass(n, f, nModules, inp, inputRes, type, B, C)
+    -- Lower branch
+    local low1 = nnlib.SpatialMaxPooling(2,2,2,2)(inp)
+    for i = 1,nModules do low1 = Residual(f,f)(low1) end
+    local low2
+
+    if n > 1 then low2 = hourglass(n-1,f,nModules,low1)
+    else
+        low2 = low1
+        for i = 1,nModules do low2 = Residual(f,f)(low2) end
+    end
+
+    local low3 = low2
+    for i = 1,nModules do low3 = Residual(f,f)(low3) end
+    local up2 = nn.SpatialUpSamplingNearest(2)(low3)
+
+    -- Bring two branches together
+    return nn.CAddTable()({up1,up2})
+end
+
+local function hourglass_ms(n, f, nModules, inp, inputRes, type, B, C)
     local ResidualUp = n >= 2 and MSResidua or Residual
     local ResidualDown = n >= 3 and MSResidua or Residual
 
@@ -20,7 +43,7 @@ local function hourglass(n, f, nModules, inp, inputRes, type, B, C)
     for i = 1,nModules do low1 = ResidualDown(f,f,1,type,false, inputRes/2,B,C)(low1) end
     local low2
 
-    if n > 1 then low2 = hourglass(n-1,f,nModules,low1,inputRes/2,type,B,C)
+    if n > 1 then low2 = hourglass_ms(n-1,f,nModules,low1,inputRes/2,type,B,C)
     else
         low2 = low1
         for i = 1,nModules do low2 = ResidualDown(f,f,1,type,false,inputRes/2,B,C)(low2) end
@@ -76,7 +99,7 @@ function createModel(opt)
   -- Bottom-up inference
   local outIdxSet = {}
   for levelIdx = 1,nSemanticLevels do
-    local hg = hourglass(4,opt.nFeats,inter, nResidual)
+    local hg = hourglass_ms(4,opt.nFeats, nResidual, inter, inputRes,'preact',B,C)
 
     -- Residual layers at output resolution
     local ll = hg
@@ -120,7 +143,7 @@ function createModel(opt)
     local srcOutIdx = table.remove(outIdxSet, 1)
     inter = nn.JoinTable(2)({out[srcOutIdx], inter_})
 
-    local hg = hourglass(4,opt.nFeats,inter, nResidual)
+    local hg = hourglass(4,opt.nFeats, nResidual, inter)
 
     -- Residual layers at output resolution
     local ll = hg

@@ -19,7 +19,7 @@ local opts = require 'src.opts'
 local checkpoints = require 'src.checkpoints'
 local Logger = require 'src.utils.Logger'
 
-local scales = torch.range(0.8, 1.3, 0.1):totable() 
+local scales = torch.range(0.8, 1.3, 0.1):totable()
 
 torch.setdefaulttensortype('torch.FloatTensor')
 torch.setnumthreads(1)
@@ -42,7 +42,7 @@ local trainer = Trainer(model, criterion, opt, optimState)
 
 if opt.testRelease then
   print('=> Test Release')
-  local testAcc, testLoss = trainer:multiScaleTest(opt.epochNumber, 
+  local testAcc, testLoss = trainer:multiScaleTest(opt.epochNumber,
       testLoader, scales)
   print(string.format(' * Results acc: %6.3f, loss: %6.3f', testAcc, testLoss))
   return
@@ -50,7 +50,7 @@ end
 
 if opt.testOnly then
   print('=> Test Only')
-  local testAcc, testLoss = trainer:multiScaleTest(opt.epochNumber, valLoader, 
+  local testAcc, testLoss = trainer:multiScaleTest(opt.epochNumber, valLoader,
       scales)
   print(string.format(' * Results acc: %6.3f, loss: %6.3f', testAcc, testLoss))
   return

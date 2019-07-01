@@ -14,7 +14,7 @@ function M.parse(arg)
   cmd:text('Options:')
   ------------ General options --------------------
   cmd:option('-data',         '',         'Path to dataset')
-  cmd:option('-dataset',      'mpii',     'Options: mpii | mpii-lsp')
+  cmd:option('-dataset',      'mpii-lsp',     'Options: mpii | mpii-lsp')
   cmd:option('-manualSeed',   0,          'Manually set RNG seed')
   cmd:option('-nGPU',         1,          'Number of GPUs to use by default')
   cmd:option('-backend',      'cudnn',    'Options: cudnn | cunn')
@@ -69,7 +69,7 @@ function M.parse(arg)
   cmd:option('-gamma',        0.1,        'LR is multiplied by gamma on ' ..
       'schedule.')
   ---------- Model options ----------------------------------
-  cmd:option('-netType',      'dlcm',     'Options: dlcm')
+  cmd:option('-netType',      'dlmscm',     'Options: dlcm')
   cmd:option('-retrain',      'none',     'Path to model to retrain with')
   cmd:option('-optimState',   'none',     'Path to an optimState to reload from')
   cmd:option('-nFeats',       256,        'Number of features in the ' ..

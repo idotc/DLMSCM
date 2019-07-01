@@ -55,7 +55,7 @@ end
 local startEpoch = checkpoint and checkpoint.epoch + 1 or opt.epochNumber
 local bestAcc = -math.huge
 local bestEpoch = 0
-local logger = Logger(paths.concat(opt.save, opt.expID, 'full.log'), 
+local logger = Logger(paths.concat(opt.save, opt.expID, 'full.log'),
     opt.resume ~= 'none')
 logger:setNames{'Train acc.', 'Train loss.', 'Test acc.', 'Test loss.'}
 logger:style{'+-', '+-', '+-', '+-'}
@@ -88,5 +88,5 @@ for epoch = startEpoch, opt.nEpochs do
   collectgarbage()
 end
 
-print(string.format(' * Finished acc: %6.3f, Best epoch: %d', bestAcc, 
+print(string.format(' * Finished acc: %6.3f, Best epoch: %d', bestAcc,
     bestEpoch))
