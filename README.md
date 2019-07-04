@@ -45,7 +45,7 @@ where PLACEHOLDER can be:
 
 3. Evaluate the predictions by comparing them against the corresponding ground truth.
 - Check http://human-pose.mpi-inf.mpg.de/#evaluation for evaluation on MPII data.
-- You may evaluate the PCK@0.2 scores of your model on the LSP test set. To get start, download our prediction `pred_multiscale_1_best.h5` and `eval code` from [github](https://github.com/idotc/evalLSP-test), and run the MATLAB script `transfer_pre_test.m`. You'll get the following results
+- You may evaluate the PCK@0.2 scores of your model on the LSP test set. To get start, download our prediction `pred_multiscale_1_best.h5` and `eval code` from [github](https://github.com/idotc/evalLSP-test), and run the MATLAB script `transfer_pre_test.m`.
 
 
 ## References
