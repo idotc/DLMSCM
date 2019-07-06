@@ -36,7 +36,7 @@ where PLACEHOLDER can be:
 
 2. Get human pose predictions using a trained model with 3 semantic levels
   ```
-  ./experiments/PLACEHOLDER/predict_dlcm_l3.sh
+  ./experiments/PLACEHOLDER/predict_dlmscm_l3.sh
   ```
 where PLACEHOLDER can be:
 - mpii: Predict on MPII 3K validation samples.
