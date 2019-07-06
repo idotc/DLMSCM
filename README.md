@@ -24,7 +24,7 @@ Download MPII [3] and LSP [4] datasets and create symbolic links so that their r
 ## Training
 Train a model with 3 semantic levels on 4 GPUs
   ```
-  ./experiments/PLACEHOLDER/train_dlcm_l3.sh
+  ./experiments/PLACEHOLDER/train_dlmscm_l3.sh
   ```
 where PLACEHOLDER can be:
 - mpii: Train with MPII training data excluding the 3K validation samples.
