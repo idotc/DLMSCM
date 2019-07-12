@@ -15,6 +15,8 @@ CUDA_VISIBLE_DEVICES=0 th main.lua \
   -nEpochs 250 \
   -snapshot 10 \
   -nFeats 256 \
+  -baseWidth 9 \
+  -cardinality 4 \
   -struct 3levels_16joints \
   -nSemanticLevels 3 \
   -ignoreEmptyLabel true \
