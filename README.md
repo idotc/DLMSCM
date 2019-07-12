@@ -22,7 +22,7 @@ Download MPII [3] and LSP [4] datasets and create symbolic links so that their r
   ```
   
 ## Training
-Train a model with 3 semantic levels on 4 GPUs
+Train a model with 3 semantic levels on 1 GPUs(16G).
   ```
   ./experiments/PLACEHOLDER/train_dlmscm_l3.sh
   ```
