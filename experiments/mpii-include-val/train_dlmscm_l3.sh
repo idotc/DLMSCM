@@ -4,7 +4,7 @@ CUDA_VISIBLE_DEVICES=0 th main.lua \
   -dataset mpii-include-val \
   -expID mpii-include-val/dlcm_l3 \
   -batchSize 6 \
-  -nGPU 4 \
+  -nGPU 1 \
   -LR 2.5e-4 \
   -momentum 0.0 \
   -weightDecay 0.0 \
