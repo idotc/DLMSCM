@@ -88,5 +88,7 @@ for epoch = startEpoch, opt.nEpochs do
   collectgarbage()
 end
 
+--print(string.format(' * Finished acc: %6.3f, Best epoch: %d', bestAcc,
+--    bestEpoch))
 print(string.format(' * Finished acc: %6.3f, Best epoch: %d', bestAcc,
     bestEpoch))
